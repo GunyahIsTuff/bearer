@@ -4,6 +4,8 @@ import requests
 import aiohttp
 import os
 
+print("TOKEN LOADED:", TOKEN is not None)
+
 TOKEN = os.getenv("DISCORD_TOKEN")
 API_URL = "https://gunyahjohnvr.pythonanywhere.com/"
 
@@ -15,8 +17,9 @@ user_tokens = {}
 
 @client.event
 async def on_ready():
-    await tree.sync()
+    print("BOT IS FULLY READY")
     print(f"Logged in as {client.user}")
+    await tree.sync()
 
 @tree.command(name="token_gen", description="Generate Auth Token")
 async def login(interaction: discord.Interaction, username: str):
