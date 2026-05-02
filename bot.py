@@ -1,6 +1,7 @@
 import discord
 from discord import app_commands
 import requests
+import aiohttp
 import os
 
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -19,25 +20,26 @@ async def on_ready():
 
 @tree.command(name="token_gen", description="Generate Auth Token")
 async def login(interaction: discord.Interaction, username: str):
-    try:
-        res = requests.post(
-            f"{API_URL}/token/generator",
-            json={"username": username},
-            timeout=10
-        )
+    async with aiohttp.ClientSession() as session:
+        try:
+            async with session.post(
+                f"{API_URL}/token/generator",
+                json={"username": username},
+                timeout=10
+            ) as res:
 
-        data = res.json()
+                data = await res.json()
 
-        if "token" in data:
-            user_tokens[interaction.user.id] = data["token"]
-            await interaction.response.send_message(
-                f"✅ Token:\n```{data['token']}```",
-                ephemeral=True
-            )
-        else:
-            await interaction.response.send_message(f"❌ {data}", ephemeral=True)
+                if "token" in data:
+                    user_tokens[interaction.user.id] = data["token"]
+                    await interaction.response.send_message(
+                        f"✅ Token:\n```{data['token']}```",
+                        ephemeral=True
+                    )
+                else:
+                    await interaction.response.send_message(f"❌ {data}", ephemeral=True)
 
-    except Exception as e:
-        await interaction.response.send_message(f"Error: {e}", ephemeral=True)
+        except Exception as e:
+            await interaction.response.send_message(f"Error: {e}", ephemeral=True)
 
 client.run(TOKEN)
