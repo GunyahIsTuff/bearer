@@ -21,7 +21,7 @@ async def on_ready():
 async def login(interaction: discord.Interaction, username: str):
     try:
         res = requests.post(
-            f"{API_URL}/auth/token/generator",
+            f"{API_URL}/token/generator",
             json={"username": username},
             timeout=10
         )
