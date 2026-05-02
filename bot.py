@@ -18,10 +18,13 @@ user_tokens = {}
 
 @client.event
 async def on_ready():
-    print("BOT IS FULLY READY")
-    print(f"Logged in as {client.user}")
     await tree.sync()
-
+    await client.change_presence(
+        status=discord.Status.online,
+        activity=discord.Game("Running API")
+    )
+    print(f"Logged in as {client.user}")
+    
 @tree.command(name="token_gen", description="Generate Auth Token")
 async def login(interaction: discord.Interaction, username: str):
     async with aiohttp.ClientSession() as session:
