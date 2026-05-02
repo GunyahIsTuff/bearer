@@ -17,7 +17,7 @@ async def on_ready():
     await tree.sync()
     print(f"Logged in as {client.user}")
 
-@tree.command(name="Generate Token", description="Generate A Auth token For Gunyah Company")
+@tree.command(name="token_gen", description="Generate A Auth token For Gunyah Company")
 async def Generate(interaction: discord.Interaction, username: str):
     try:
         res = requests.post(
