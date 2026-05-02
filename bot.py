@@ -3,6 +3,25 @@ from discord import app_commands
 import aiohttp
 import os
 import time
+from aiohttp import web
+import os
+import asyncio
+
+async def health(request):
+    return web.Response(text="OK")
+
+async def start_web():
+    app = web.Application()
+    app.router.add_get("/", health)
+
+    runner = web.AppRunner(app)
+    await runner.setup()
+
+    port = int(os.getenv("PORT", 8080))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+
+    print(f"Health server running on port {port}")
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 API_URL = "https://gunyahjohnvr.pythonanywhere.com"
@@ -54,7 +73,11 @@ async def login(interaction: discord.Interaction, username: str):
                 ephemeral=True
             )
 
-client.run(TOKEN)
+async def main():
+    await start_web()
+    await client.start(TOKEN)
+
+asyncio.run(main())
 
 while True:
     time.sleep(60)
