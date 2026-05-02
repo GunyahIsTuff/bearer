@@ -74,11 +74,8 @@ async def login(interaction: discord.Interaction, username: str):
             )
 
 async def main():
-    await start_web()
     await client.start(TOKEN)
+    await asyncio.Event().wait()  # 🔥 THIS keeps the process alive forever
 
-asyncio.run(main())
-
-while True:
-    time.sleep(60)
-    print("Bot still alive")
+if __name__ == "__main__":
+    asyncio.run(main())
