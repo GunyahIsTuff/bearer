@@ -6,7 +6,6 @@ import asyncio
 import logging
 
 async def main():
-    await start_web()   # optional health server (if using)
     await client.start(TOKEN)
     
 TOKEN = os.getenv("DISCORD_TOKEN")
