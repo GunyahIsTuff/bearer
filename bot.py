@@ -30,7 +30,7 @@ async def on_ready():
 
     await client.change_presence(
         status=discord.Status.online,
-        activity=discord.Game("API Running 🚀")
+        activity=discord.Game("API Running")
     )
 
     print(f"Logged in as {client.user}")
