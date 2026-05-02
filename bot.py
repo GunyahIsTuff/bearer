@@ -26,7 +26,7 @@ async def presence_loop():
         try:
             await client.change_presence(
                 status=discord.Status.online,
-                activity=discord.Game("API Online 🚀")
+                activity=discord.Game("API Online")
             )
         except Exception as e:
             print("Presence error:", e)
@@ -38,12 +38,10 @@ async def presence_loop():
 async def on_ready():
         await client.change_presence(
         status=discord.Status.online,
-        activity=discord.Game("API Running 🚀")
+        activity=discord.Game("API Running")
     )
     print("Presence set")
     print(f"Logged in as {client.user}")
-
-    print("Presence set")
     try:
         await tree.sync()
         print("Commands synced")
