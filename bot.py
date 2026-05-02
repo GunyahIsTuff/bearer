@@ -4,9 +4,10 @@ import requests
 import aiohttp
 import os
 
+TOKEN = os.getenv("DISCORD_TOKEN")  # MUST be before print
+
 print("TOKEN LOADED:", TOKEN is not None)
 
-TOKEN = os.getenv("DISCORD_TOKEN")
 API_URL = "https://gunyahjohnvr.pythonanywhere.com/"
 
 intents = discord.Intents.default()
