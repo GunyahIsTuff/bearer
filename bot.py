@@ -5,6 +5,10 @@ import os
 import asyncio
 import logging
 
+async def main():
+    await start_web()   # optional health server (if using)
+    await client.start(TOKEN)
+    
 TOKEN = os.getenv("DISCORD_TOKEN")
 API_URL = "https://gunyahjohnvr.pythonanywhere.com/"
 
@@ -15,6 +19,7 @@ client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 
 user_tokens = {}
+
 
 
 async def presence_loop():
@@ -88,4 +93,5 @@ if not TOKEN:
     raise RuntimeError("DISCORD_TOKEN missing in environment variables")
 
 print("Starting bot...")
-client.run(TOKEN)
+if __name__ == "__main__":
+    asyncio.run(main())
