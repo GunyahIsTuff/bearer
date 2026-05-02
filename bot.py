@@ -39,7 +39,7 @@ async def on_ready():
 # ------------------------
 # SLASH COMMAND (FIXED)
 # ------------------------
-@tree.command(name="token_gen", description="Generate Auth token")
+@tree.command(name="token_gen", description="Generate a Auth token")
 async def token_gen(interaction: discord.Interaction, username: str):
     global session
 
