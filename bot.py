@@ -2,6 +2,7 @@ import discord
 from discord import app_commands
 import aiohttp
 import os
+import time
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 API_URL = "https://gunyahjohnvr.pythonanywhere.com"
@@ -54,3 +55,7 @@ async def login(interaction: discord.Interaction, username: str):
             )
 
 client.run(TOKEN)
+
+while True:
+    time.sleep(60)
+    print("Bot still alive")
