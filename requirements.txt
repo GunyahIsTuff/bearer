@@ -1,2 +1,4 @@
-discord.py
+flask
 requests
+python-dotenv
+gunicorn
